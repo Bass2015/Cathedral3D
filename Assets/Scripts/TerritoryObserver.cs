@@ -11,6 +11,8 @@ public class TerritoryObserver : MonoBehaviour{
 	Stack<Square> openStack = new Stack<Square>(100);
 	Stack<Square[]> families = new Stack<Square[]>(100);
 	List<Square> closedList = new List<Square>(100);
+	//List<Building> buildingsAtNewTerritory
+
 
 	List<Square> newChildren = new List<Square>(8);
 	List<Square> newFamily =  new List<Square>(8);
@@ -46,7 +48,7 @@ public class TerritoryObserver : MonoBehaviour{
 	/// <param name="squareToCheck">Square to check.</param>
 	void CheckSquare (Square squareToCheck)
 	{
-		
+		//Guardar el edificio del cuadrado
 		Square[] familyToCheck = null;
 		ResetFamily();
 		if (firstLoop)
@@ -73,6 +75,10 @@ public class TerritoryObserver : MonoBehaviour{
 			
 	}
 
+	void SaveBuilding(Square square)
+    {
+
+    }
 	/// <summary>
 	/// Reinizializa todos los miembros cuando comienza a recorrer un 
 	/// nuevo posible territorio.
@@ -140,6 +146,7 @@ public class TerritoryObserver : MonoBehaviour{
 
 			//DEBUG
 			Debug.DrawLine(squareToCheck.transform.position, neighbour.transform.position, Color.black, 2);
+
 		}
 	}
 
@@ -187,7 +194,7 @@ public class TerritoryObserver : MonoBehaviour{
 		TerritoryMarker.MarkTerritory(borderOfNewTerritory.ToArray());
 
 		//DEBUG
-		StartCoroutine(DebugFrontera());
+		//StartCoroutine(DebugFrontera());
 		
 	}
 

@@ -85,4 +85,12 @@ public static class TerritoryMarker {
 			}
 		} while(haveUnMarked);
 	}
+
+	public static void Reset()
+    {
+        if (territories != null)
+        {
+            territories.Clear(); 
+        }
+    }
 }
