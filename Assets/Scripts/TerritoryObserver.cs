@@ -31,7 +31,7 @@ public class TerritoryObserver : MonoBehaviour{
 
 
 	//Este es el método que se llama cada vez que se coloca una ficha.
-	//El parámetro 'firstSquare' es la una de las casillas en las que está
+	//El parámetro 'firstSquare' es una de las casillas en las que está
 	//colocada esa ficha.
 	public void CheckForNewTerritory (Square firstSquare){
 		if(!firstLoop){
