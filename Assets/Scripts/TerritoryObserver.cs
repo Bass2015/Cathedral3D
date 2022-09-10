@@ -80,7 +80,7 @@ public class TerritoryObserver : MonoBehaviour{
 
     }
 	/// <summary>
-	/// Reinizializa todos los miembros cuando comienza a recorrer un 
+	/// Reinicializa todos los miembros cuando comienza a recorrer un 
 	/// nuevo posible territorio.
 	/// </summary>
 	void ResetMembers()

@@ -124,7 +124,13 @@ public class Square : MonoBehaviour {
 	}
 
 	void Highlight(Color color) {
-		Color newColor = new Color(color.r, color.g, color.b, 0.6f);
+		float f = 0.5f; // desaturate by 20%
+		float br = 1.4f;
+		float L = 0.3f * color.r + 0.6f * color.g + 0.1f * color.b;
+		float new_r = color.r*br + f * (L - color.r);
+		float new_g = color.g*br + f * (L - color.g);
+		float new_b = color.b*br + f * (L - color.b);
+		Color newColor = new Color(new_r, new_g, new_b);
 		Material mat = new Material(defaultMaterial);
 		mat.color = newColor;
 		mRenderer.material = mat;

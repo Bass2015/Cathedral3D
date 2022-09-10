@@ -30,7 +30,7 @@ public class Building : MonoBehaviour {
 	bool onBoard;
 	bool onAir;
 	int height;
-	int width;
+	public int width;
 
 	delegate void ResetSquares();
 	ResetSquares resetSquares;
@@ -109,7 +109,7 @@ public class Building : MonoBehaviour {
 				break;
 			case Type.Cathedral:
 				height = 3;
-				width = 5;
+				width = 4;
 				break;
 		}
 	}
@@ -120,15 +120,15 @@ public class Building : MonoBehaviour {
 		if (onBoard && IsSurrounded()) {
 			GoBack();
 		}
-		if (Input.GetMouseButtonDown(1)) {
-			RotateIfOnAir();
+		if (Input.GetMouseButtonDown(1) && onAir) {
+			Rotate();
 		}
 		if (Input.GetMouseButtonUp(0) && onAir) {
 			TryLetDown();
 		}
 
 	}
-	void TryLetDown(){
+	public void TryLetDown(){
 		Square[] squaresUnder;
 		if (CanLetDown(out squaresUnder)){
 			positionOnBoard = squaresUnder;
@@ -149,8 +149,8 @@ public class Building : MonoBehaviour {
 		bool isBoardUnder;
 		squaresUnder = new Square[bricks.Length];
 		for (int i = 0; i < bricks.Length; i++) {
-			Brick sq = bricks[i].GetComponent <Brick>();
-			isBoardUnder = sq.CanLetDown(out squaresUnder[i]);
+			Brick brick = bricks[i].GetComponent <Brick>();
+			isBoardUnder = brick.CanLetDown(out squaresUnder[i]);
 			if (!isBoardUnder) { 
 				return false;
 			}
@@ -168,19 +168,22 @@ public class Building : MonoBehaviour {
 		onBoard = true;
 		occupy(this);
 		SaveNeighbourhood();
-        foreach (Square square in positionOnBoard)
-        {
-			TerritoryObserver.instance.CheckForNewTerritory(square);
+		if (!this.CompareTag("Player0"))
+		{
+			foreach (var square in positionOnBoard)
+			{
+				TerritoryObserver.instance.CheckForNewTerritory(square);
+			}
 		}
-	}
+    }
 
-	public void RotateIfOnAir () {
-		if (onAir) {
-			gameObject.transform.Rotate(new Vector3 (0, 90f));
-			int aux = height;
-			height = width;
-			width = aux;
-		}
+	public void Rotate () {
+		
+		gameObject.transform.Rotate(new Vector3 (0, 90f));
+		int aux = height;
+		height = width;
+		width = aux;
+		
 	}
 
 	public void Move () {
